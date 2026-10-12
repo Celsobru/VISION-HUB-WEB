@@ -1,0 +1,17 @@
+# Vísion Hub Web — https://visionhubweb.com.br
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /painel.html
+Disallow: /instabot-panel.html
+Disallow: /auto-cut-panel.html
+Disallow: /hospedagem-panel.html
+Disallow: /login.html
+Disallow: /cadastro.html
+Disallow: /pagamento-sucesso.html
+Disallow: /pagamento-pendente.html
+Disallow: /pagamento-falha.html
+Disallow: /server/
+Disallow: /downloads/
+
+Sitemap: https://visionhubweb.com.br/sitemap.xml

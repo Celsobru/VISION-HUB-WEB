@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crie sua conta Vision Plus e comece a automatizar seu Instagram">
+    <title>Criar Conta - Vision Plus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="auth-page">
+
+    <div class="auth-wrapper">
+        <div class="auth-left">
+            <div class="auth-branding">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Vision Plus" class="logo-img">
+                </a>
+                <div class="auth-features">
+                    <div class="auth-feature">
+                        <span class="auth-feature-icon">🎁</span>
+                        <div>
+                            <strong>7 Dias Grátis</strong>
+                            <p>Teste todas as funcionalidades sem compromisso</p>
+                        </div>
+                    </div>
+                    <div class="auth-feature">
+                        <span class="auth-feature-icon">⚡</span>
+                        <div>
+                            <strong>Ativação Instantânea</strong>
+                            <p>Crie a conta, baixe a extensão e comece a usar</p>
+                        </div>
+                    </div>
+                    <div class="auth-feature">
+                        <span class="auth-feature-icon">💳</span>
+                        <div>
+                            <strong>Sem Cartão</strong>
+                            <p>Teste grátis sem precisar de cartão de crédito</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Criar Conta</h2>
+                    <p>Comece seu teste grátis de 7 dias</p>
+                </div>
+
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome" required autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Celular (WhatsApp)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(11) 99999-9999" required autocomplete="tel">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram">@ do Instagram</label>
+                        <div class="instagram-wrapper">
+                            <span class="instagram-at">@</span>
+                            <input type="text" id="instagram" name="instagram" placeholder="seu_usuario" required>
+                        </div>
+                        <span class="form-hint">Informe o @ da conta que usará com a extensão</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
+                            <button type="button" class="toggle-password" id="toggle-password" aria-label="Mostrar senha">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password-confirm">Confirmar Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password-confirm" name="password_confirm" placeholder="Repita a senha" required minlength="6" autocomplete="new-password">
+                            <button type="button" class="toggle-password" id="toggle-password-confirm" aria-label="Mostrar senha">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span class="checkmark"></span>
+                            Concordo com os <a href="termos.html" class="terms-link">Termos de Uso</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-auth" id="btn-submit">Criar Conta Grátis</button>
+
+                    <div class="auth-message" id="auth-message"></div>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/pwa-install.js"></script>
+</body>
+</html>

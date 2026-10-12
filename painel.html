@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Painel - Vísion Hub Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vision-hub.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vísion Hub Web" class="logo-img">
+            </a>
+            <div class="header-right">
+                <span id="user-greeting" class="user-greeting"></span>
+                <a href="admin.html" class="btn-login" id="btn-admin-header" style="display:none; background: rgba(0, 212, 255, 0.12); border: 1px solid rgba(0, 212, 255, 0.3); color: #00d4ff; margin-right: 10px; vertical-align:middle; text-decoration:none; padding:10px 18px; border-radius:10px; font-weight:600;">Painel Admin</a>
+                <button class="btn-login" id="btn-logout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HUB -->
+    <main id="hub-main">
+        <div class="hub-container">
+            <div class="hub-header">
+                <h1 class="hub-greeting" id="hub-greeting">Olá!</h1>
+                <p>Escolha um dos nossos serviços para gerenciar.</p>
+            </div>
+
+            <div class="hub-grid" id="hub-grid">
+                <!-- InstaBot -->
+                <a href="instabot-panel.html" class="hub-card">
+                    <span class="hub-tag green">Ativo</span>
+                    <div class="hub-icon">🤖</div>
+                    <h3>InstaBot</h3>
+                    <p>Painel do automatizador de Instagram: licença, download da extensão, postagens com IA, tutoriais e planos.</p>
+                    <span class="hub-cta">Abrir painel →</span>
+                </a>
+
+                <!-- Auto Cut -->
+                <a href="auto-cut-panel.html" class="hub-card">
+                    <span class="hub-tag green">Ativo</span>
+                    <div class="hub-icon">✂️</div>
+                    <h3>Auto Cut</h3>
+                    <p>Crie projetos de cortes de vídeo, acompanhe o processamento e baixe seus Reels/Posts prontos com legendas automáticas.</p>
+                    <span class="hub-cta">Abrir painel →</span>
+                </a>
+
+                <!-- Hospedagem (Admin) -->
+                <a href="hospedagem-panel.html" class="hub-card admin-only" id="hub-card-hosting" style="display:none;">
+                    <span class="hub-tag green">Admin</span>
+                    <div class="hub-icon">🌐</div>
+                    <h3>Hospedagem</h3>
+                    <p>Gerencie clientes e aplicações do servidor: ligue e desligue serviços, acompanhe status e planos.</p>
+                    <span class="hub-cta">Abrir painel →</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script defer src="js/hub.js"></script>
+    <script defer src="js/pwa-install.js"></script>
+</body>
+</html>

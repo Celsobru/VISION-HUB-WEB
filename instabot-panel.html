@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaBot - Painel | Vísion Hub Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/painel.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <a href="painel.html" class="logo" style="text-decoration:none;">
+                <img src="images/logo.png" alt="Vísion Hub Web" class="logo-img">
+                <span style="color:#00d4ff; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px;">InstaBot</span>
+            </a>
+            <div class="header-right">
+                <span id="user-greeting" class="user-greeting"></span>
+                <a href="painel.html" class="btn-login" style="text-decoration:none; margin-right:10px; vertical-align:middle; padding:10px 18px; border-radius:10px;">⬅ Meu Painel</a>
+                <a href="admin.html" class="btn-login" id="btn-admin-header" style="display:none; background: rgba(0, 212, 255, 0.12); border: 1px solid rgba(0, 212, 255, 0.3); color: #00d4ff; margin-right: 10px; vertical-align:middle; text-decoration:none; padding:10px 18px; border-radius:10px; font-weight:600;">Painel Admin</a>
+                <button class="btn-login" id="btn-logout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAINEL -->
+    <main id="painel-main">
+        <div class="painel-container">
+
+            <!-- Status da Licença -->
+            <section class="painel-card license-card" id="license-card">
+                <div class="license-header">
+                    <div class="license-icon" id="license-icon">🔓</div>
+                    <div class="license-info">
+                        <h2 id="license-title">Carregando...</h2>
+                        <p id="license-subtitle"></p>
+                    </div>
+                </div>
+                <div class="license-details">
+                    <div class="license-detail">
+                        <span class="detail-label">Plano</span>
+                        <span class="detail-value" id="detail-plan">-</span>
+                    </div>
+                    <div class="license-detail">
+                        <span class="detail-label">Expira em</span>
+                        <span class="detail-value" id="detail-expiry">-</span>
+                    </div>
+                    <div class="license-detail">
+                        <span class="detail-label">Dias restantes</span>
+                        <span class="detail-value" id="detail-days">-</span>
+                    </div>
+                </div>
+                <div class="license-action" id="license-action" style="display:none;">
+                    <a href="#planos-section" class="btn-primary">Renovar Assinatura</a>
+                </div>
+            </section>
+
+            <!-- Dados do Usuário -->
+            <section class="painel-card">
+                <h3>Meus Dados</h3>
+                <div class="user-data-grid">
+                    <div class="user-data-item">
+                        <span class="data-label">Nome</span>
+                        <span class="data-value" id="data-name">-</span>
+                    </div>
+                    <div class="user-data-item">
+                        <span class="data-label">Email</span>
+                        <span class="data-value" id="data-email">-</span>
+                    </div>
+                    <div class="user-data-item">
+                        <span class="data-label">Instagram</span>
+                        <span class="data-value" id="data-instagram">-</span>
+                    </div>
+                    <div class="user-data-item">
+                        <span class="data-label">Membro desde</span>
+                        <span class="data-value" id="data-since">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download da Extensão -->
+            <section class="painel-card download-card">
+                <div class="download-content">
+                    <div class="download-icon">🧩</div>
+                    <div class="download-info">
+                        <h3>Baixar Extensão</h3>
+                        <p>Instale a extensão no Google Chrome para começar a usar o automatizador.</p>
+                    </div>
+                    <a href="#" class="btn-primary download-btn" id="btn-download" onclick="trackDownload(event)">
+                        ⬇️ Download (.zip)
+                    </a>
+                </div>
+                <div class="download-steps">
+                    <div class="download-step">
+                        <span class="step-num">1</span>
+                        <span>Baixe o arquivo .zip</span>
+                    </div>
+                    <div class="download-step">
+                        <span class="step-num">2</span>
+                        <span>Extraia a pasta</span>
+                    </div>
+                    <div class="download-step">
+                        <span class="step-num">3</span>
+                        <span>Abra chrome://extensions</span>
+                    </div>
+                    <div class="download-step">
+                        <span class="step-num">4</span>
+                        <span>Ative "Modo desenvolvedor" e clique "Carregar sem compactação"</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configurações de Postagem por IA -->
+            <section class="painel-card" id="ai-posting-section">
+                <h3>🤖 Automação de Postagens com IA</h3>
+                <p style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; opacity:0.8;">Configure o assistente de inteligência artificial para criar e postar conteúdos de forma 100% autônoma no seu Instagram.</p>
+                
+                <form id="formAiSettings" style="display:flex; flex-direction:column; gap:20px;">
+                    <!-- Seleção de Modo -->
+                    <div class="form-group" style="display:flex; flex-direction:column; gap:8px;">
+                        <label style="font-weight:600; font-size:14px; color:var(--text-primary);">Modo de Nicho:</label>
+                        <div style="display:flex; gap:20px; align-items:center;">
+                            <label style="cursor:pointer; font-size:14px; display:flex; align-items:center; gap:8px; color:var(--text-secondary);">
+                                <input type="radio" name="nicheMode" value="manual" checked style="accent-color:#00d4ff; width:16px; height:16px;" /> Nicho Personalizado
+                            </label>
+                            <label style="cursor:pointer; font-size:14px; display:flex; align-items:center; gap:8px; color:var(--text-secondary);">
+                                <input type="radio" name="nicheMode" value="auto" style="accent-color:#00d4ff; width:16px; height:16px;" /> Nicho Automático (Tendências / Perfis Dark)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Nicho e Produto -->
+                    <div id="nicheProductWrapper" style="display:flex; flex-direction:column; gap:8px;">
+                        <label for="nicheProduct" style="font-weight:600; font-size:14px; color:var(--text-primary);">Nicho e Produto/Serviço:</label>
+                        <input type="text" id="nicheProduct" placeholder="Ex: Estética Automotiva - Vitrificação de pintura" style="width:100%; padding:12px; border:1px solid var(--border-subtle); border-radius:8px; background:var(--bg-primary); color:var(--text-primary); font-family:inherit; font-size:14px;" />
+                    </div>
+
+                    <!-- Instruções Adicionais -->
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <label for="instructions" style="font-weight:600; font-size:14px; color:var(--text-primary);">Instruções adicionais para a IA (Opcional):</label>
+                        <textarea id="instructions" rows="3" placeholder="Ex: Destaque a durabilidade de 3 anos, use tom entusiasmado e adicione hashtags do ramo." style="width:100%; padding:12px; border:1px solid var(--border-subtle); border-radius:8px; background:var(--bg-primary); color:var(--text-primary); font-family:inherit; font-size:14px; resize:vertical;"></textarea>
+                    </div>
+
+                    <!-- Grid de Horário e Dias -->
+                    <div style="display:grid; grid-template-columns:1fr 2fr; gap:20px;">
+                        <!-- Horário -->
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            <label for="postTime" style="font-weight:600; font-size:14px; color:var(--text-primary);">Horário de Postagem:</label>
+                            <input type="time" id="postTime" value="09:00" style="padding:12px; border:1px solid var(--border-subtle); border-radius:8px; background:var(--bg-primary); color:var(--text-primary); font-family:inherit; font-size:14px;" />
+                        </div>
+                        
+                        <!-- Dias da semana -->
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            <label style="font-weight:600; font-size:14px; color:var(--text-primary);">Dias de Postagem:</label>
+                            <div style="display:flex; flex-wrap:wrap; gap:8px; padding-top:4px;">
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="1" checked style="accent-color:#00d4ff;" /> Seg</label>
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="2" checked style="accent-color:#00d4ff;" /> Ter</label>
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="3" checked style="accent-color:#00d4ff;" /> Qua</label>
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="4" checked style="accent-color:#00d4ff;" /> Qui</label>
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="5" checked style="accent-color:#00d4ff;" /> Sex</label>
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="6" style="accent-color:#00d4ff;" /> Sáb</label>
+                                <label style="display:flex; align-items:center; gap:4px; font-size:12px; background:var(--bg-primary); padding:6px 10px; border-radius:6px; border:1px solid var(--border-subtle); cursor:pointer; color:var(--text-secondary);"><input type="checkbox" class="ai-day" value="0" style="accent-color:#00d4ff;" /> Dom</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ativar / Desativar switch -->
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <input type="checkbox" id="isEnabled" style="width:20px; height:20px; accent-color:#00d4ff; cursor:pointer;" />
+                        <label for="isEnabled" style="font-weight:600; font-size:14px; cursor:pointer; color:var(--text-primary);">Ativar Postagens Automáticas na Extensão</label>
+                    </div>
+
+                    <!-- Status de salvamento / Botão -->
+                    <div style="display:flex; align-items:center; gap:16px;">
+                        <button type="submit" class="btn-primary" style="padding:14px 28px; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-size:14px; transition: opacity 0.2s;">Salvar Configurações</button>
+                        <span id="ai-save-msg" style="font-size:14px; font-weight:500; display:none;"></span>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Treinamento -->
+            <section class="painel-card" id="tutorials-section" style="text-align: center; padding: 40px 20px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🎓</div>
+                <h3 style="margin-bottom: 8px;">Aprenda a Extrair o Máximo da Ferramenta</h3>
+                <p style="color: var(--text-muted); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto;">Assista aos nossos vídeos tutoriais e descubra estratégias para configurar filtros perfeitos e aumentar suas vendas organicamente.</p>
+                <div id="tutorials-buttons" style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+                    <span style="color: var(--text-muted); font-size: 14px;">Carregando tutoriais...</span>
+                </div>
+            </section>
+
+            <!-- ============ PLANOS DE ASSINATURA ============ -->
+            <section class="painel-card" id="planos-section">
+                <h3>📦 Escolha seu Plano</h3>
+                <p style="color:var(--text-muted); font-size:14px; margin-bottom:12px;">Assine para continuar usando todas as funcionalidades da extensão.</p>
+                
+                <!-- Seletor de quantidade de contas -->
+                <div style="background:rgba(108,92,231,0.1); border:1px solid rgba(108,92,231,0.3); border-radius:12px; padding:16px; margin-bottom:20px;">
+                    <label style="font-size:14px; font-weight:600;">📱 Quantas contas de Instagram?</label>
+                    <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+                        <button onclick="changeQtd(-1)" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; width:36px; height:36px; border-radius:8px; font-size:18px; cursor:pointer;">−</button>
+                        <span id="qtd-contas" style="font-size:24px; font-weight:700; min-width:30px; text-align:center;">1</span>
+                        <button onclick="changeQtd(1)" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; width:36px; height:36px; border-radius:8px; font-size:18px; cursor:pointer;">+</button>
+                        <span style="font-size:12px; opacity:0.6; margin-left:8px;">Cada @ adicional = +80% do valor</span>
+                    </div>
+                    <div id="extra-ig-inputs" style="margin-top:12px; display:none;"></div>
+                </div>
+
+                <div class="bundle-toggle" style="display:flex; gap:10px; margin-bottom:20px;">
+                    <button type="button" id="bundle-ib" class="btn-buy featured" onclick="setBundle('instabot')" style="flex:1;">🤖 Só InstaBot</button>
+                    <button type="button" id="bundle-combo" class="btn-buy" onclick="setBundle('combo')" style="flex:1; opacity:0.7;">🤖+✂️ Combo</button>
+                </div>
+
+                <div class="plans-grid">
+                    <div class="plan-option">
+                        <div class="plan-name">Mensal</div>
+                        <div class="plan-price">R$ <strong id="price-mensal">79</strong></div>
+                        <div class="plan-period" id="period-mensal">1 mês • R$ 79,00/mês</div>
+                        <button class="btn-buy" onclick="buyPlan('mensal')">Comprar</button>
+                    </div>
+                    <div class="plan-option">
+                        <div class="plan-name">Trimestral</div>
+                        <div class="plan-price">R$ <strong id="price-trimestral">180</strong></div>
+                        <div class="plan-period" id="period-trimestral">3 meses • R$ 60/mês</div>
+                        <button class="btn-buy" onclick="buyPlan('trimestral')">Comprar</button>
+                    </div>
+                    <div class="plan-option featured">
+                        <div class="plan-badge">Mais Popular</div>
+                        <div class="plan-name">Semestral</div>
+                        <div class="plan-price">R$ <strong id="price-semestral">299</strong></div>
+                        <div class="plan-period" id="period-semestral">6 meses • R$ 49,83/mês</div>
+                        <button class="btn-buy featured" onclick="buyPlan('semestral')">Comprar</button>
+                    </div>
+                    <div class="plan-option">
+                        <div class="plan-name">Anual</div>
+                        <div class="plan-price">R$ <strong id="price-anual">499</strong></div>
+                        <div class="plan-period" id="period-anual">12 meses • R$ 41,58/mês</div>
+                        <button class="btn-buy" onclick="buyPlan('anual')">Comprar</button>
+                    </div>
+                </div>
+                <div id="payment-status" style="display:none; margin-top:16px; padding:12px; border-radius:8px; text-align:center; font-size:14px;"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ============ VIDEO MODAL ============ -->
+    <div class="video-modal-overlay" id="video-modal">
+        <div class="video-modal-container">
+            <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+            <iframe id="video-iframe" class="video-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script defer src="js/painel.js"></script>
+    <script defer src="js/pwa-install.js"></script>
+</body>
+</html>

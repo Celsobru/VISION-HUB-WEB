@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Suporte da Vísion Hub Web: tire dúvidas sobre problemas técnicos, planos, pagamentos e funcionalidades. Envie sua solicitação e receba atendimento rápido.">
+    <title>Suporte e Atendimento | Vísion Hub Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="canonical" href="https://visionhubweb.com.br/suporte.html">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Vísion Hub Web">
+    <meta property="og:title" content="Suporte e Atendimento | Vísion Hub Web">
+    <meta property="og:description" content="Suporte da Vísion Hub Web: tire dúvidas sobre problemas técnicos, planos, pagamentos e funcionalidades. Envie sua solicitação e receba atendimento rápido.">
+    <meta property="og:url" content="https://visionhubweb.com.br/suporte.html">
+    <meta property="og:image" content="https://visionhubweb.com.br/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Vísion Hub Web - Sites, Sistemas, Hospedagem e Automações">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Suporte e Atendimento | Vísion Hub Web">
+    <meta name="twitter:description" content="Suporte da Vísion Hub Web: tire dúvidas sobre problemas técnicos, planos, pagamentos e funcionalidades. Envie sua solicitação e receba atendimento rápido.">
+    <meta name="twitter:image" content="https://visionhubweb.com.br/images/og-image.png">
+    <meta name="twitter:image:alt" content="Vísion Hub Web - Sites, Sistemas, Hospedagem e Automações">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vísion Hub Web - Suporte" class="logo-img">
+            </a>
+            <div class="header-right">
+                <a href="painel.html" class="btn-login">Meu Painel</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUPPORT FORM -->
+    <main class="auth-main">
+        <div class="auth-container" style="max-width: 600px;">
+            <div class="auth-header">
+                <h1>🎫 Suporte</h1>
+                <p>Envie sua dúvida ou problema que entraremos em contato.</p>
+            </div>
+            <div id="support-message" class="auth-message" style="display:none;"></div>
+            <form id="support-form">
+                <div class="form-group">
+                    <label for="support-name">Seu nome</label>
+                    <input type="text" id="support-name" required placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="support-email">Seu email</label>
+                    <input type="email" id="support-email" required placeholder="email@exemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="support-instagram">@ do Instagram</label>
+                    <input type="text" id="support-instagram" placeholder="@seuusuario">
+                </div>
+                <div class="form-group">
+                    <label for="support-subject">Assunto</label>
+                    <select id="support-subject" class="auth-input" required>
+                        <option value="">Selecione...</option>
+                        <option value="Problema técnico">Problema técnico</option>
+                        <option value="Dúvida sobre plano">Dúvida sobre plano</option>
+                        <option value="Pagamento">Pagamento</option>
+                        <option value="Funcionalidade">Funcionalidade</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="support-msg">Mensagem</label>
+                    <textarea id="support-msg" rows="5" required placeholder="Descreva seu problema ou dúvida..." style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit; font-size:14px; resize:vertical; box-sizing:border-box;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" id="btn-support-submit" style="width:100%; padding:14px; border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:15px;">Enviar Solicitação</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const API_URL = window.location.origin + '/api';
+        
+        // Auto-fill if logged in
+        const userData = localStorage.getItem('vp_user');
+        if (userData) {
+            const user = JSON.parse(userData);
+            document.getElementById('support-name').value = user.name || '';
+            document.getElementById('support-email').value = user.email || '';
+            document.getElementById('support-instagram').value = '@' + (user.instagram || '');
+        }
+
+        document.getElementById('support-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-support-submit');
+            const msg = document.getElementById('support-message');
+            
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+
+            try {
+                const res = await fetch(`${API_URL}/support/ticket`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('support-name').value,
+                        email: document.getElementById('support-email').value,
+                        instagram: document.getElementById('support-instagram').value.replace('@', ''),
+                        subject: document.getElementById('support-subject').value,
+                        message: document.getElementById('support-msg').value
+                    })
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    msg.className = 'auth-message success';
+                    msg.textContent = '✅ Solicitação enviada com sucesso! Entraremos em contato em breve.';
+                    msg.style.display = 'block';
+                    document.getElementById('support-form').reset();
+                } else {
+                    msg.className = 'auth-message error';
+                    msg.textContent = '❌ ' + data.message;
+                    msg.style.display = 'block';
+                }
+            } catch (err) {
+                msg.className = 'auth-message error';
+                msg.textContent = '❌ Erro ao enviar. Tente novamente.';
+                msg.style.display = 'block';
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Enviar Solicitação';
+        });
+    </script>
+    <script src="js/pwa-install.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Suporte Técnico e Atendimento ao Cliente",
+        "provider": {
+            "@type": "Organization",
+            "name": "Vísion Hub Web",
+            "url": "https://visionhubweb.com.br"
+        },
+        "areaServed": "BR",
+        "url": "https://visionhubweb.com.br/suporte.html"
+    }
+    </script>
+    <script src="js/site-content.js" defer></script>
+    <script src="js/site-edit.js" defer></script>
+</body>
+</html>

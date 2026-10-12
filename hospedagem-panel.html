@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospedagem - Painel | Vísion Hub Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vision-hub.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <a href="painel.html" class="logo" style="text-decoration:none;">
+                <img src="images/logo.png" alt="Vísion Hub Web" class="logo-img">
+                <span style="color:#00d4ff; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px;">Hospedagem</span>
+            </a>
+            <div class="header-right">
+                <span id="user-greeting" class="user-greeting"></span>
+                <a href="painel.html" class="btn-login" style="text-decoration:none; margin-right:10px; vertical-align:middle; padding:10px 18px; border-radius:10px;">⬅ Meu Painel</a>
+                <button class="btn-login" id="btn-logout">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAINEL HOSPEDAGEM -->
+    <main id="hosting-main">
+        <div class="hosting-container">
+
+            <div class="hosting-header">
+                <div>
+                    <h1>🌐 Gerenciar Hospedagem</h1>
+                    <p class="header-sub">Clientes, sites, VPS e aplicações do seu servidor</p>
+                </div>
+                <button class="btn-primary" id="btn-new-client">+ Novo Cliente</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-row" id="hosting-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                    <div class="stat-label">Clientes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🟢</div>
+                    <div class="stat-value" id="stat-running">0</div>
+                    <div class="stat-label">Rodando</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚪</div>
+                    <div class="stat-value" id="stat-stopped">0</div>
+                    <div class="stat-label">Parados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌐</div>
+                    <div class="stat-value" id="stat-sites">0</div>
+                    <div class="stat-label">Sites</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚙️</div>
+                    <div class="stat-value" id="stat-vps">0</div>
+                    <div class="stat-label">VPS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-value" id="stat-apps">0</div>
+                    <div class="stat-label">Apps</div>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="hosting-toolbar">
+                <input type="text" id="search-clients" class="admin-search" placeholder="🔍 Buscar por cliente, domínio ou app..." style="flex:1;">
+            </div>
+
+            <!-- Tabela -->
+            <div class="hosting-table-wrap">
+                <table class="hosting-table" id="hosting-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Domínio / App</th>
+                            <th>Tipo</th>
+                            <th>Plano</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hosting-tbody">
+                        <tr>
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <div class="empty-icon">🔄</div>
+                                    <p>Carregando clientes...</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL CADASTRO/EDIÇÃO -->
+    <div class="modal-overlay" id="client-modal">
+        <div class="modal-box">
+            <button class="modal-close" id="btn-modal-close">&times;</button>
+            <h2 id="modal-title">Novo Cliente</h2>
+            <form id="client-form">
+                <input type="hidden" id="client-id">
+                <div class="form-group">
+                    <label for="client_name">Nome do Cliente *</label>
+                    <input type="text" id="client_name" required placeholder="Ex: Maria Lojas">
+                </div>
+                <div class="form-group">
+                    <label for="client_email">Email</label>
+                    <input type="email" id="client_email" placeholder="email@cliente.com">
+                </div>
+                <div class="form-group">
+                    <label for="client_domain">Domínio / URL</label>
+                    <input type="text" id="client_domain" placeholder="Ex: mariashop.com.br">
+                </div>
+                <div class="form-group">
+                    <label for="client_app_name">Nome da Aplicação / Serviço</label>
+                    <input type="text" id="client_app_name" placeholder="Ex: Loja Maria API">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="client_type">Tipo</label>
+                        <select id="client_type">
+                            <option value="site">Site</option>
+                            <option value="vps">VPS</option>
+                            <option value="app">Aplicativo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="client_plan">Plano</label>
+                        <select id="client_plan">
+                            <option value="basico">Básico</option>
+                            <option value="pro">Pro</option>
+                            <option value="premium">Premium</option>
+                            <option value="custom">Customizado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="client_directory">Diretório da aplicação</label>
+                    <input type="text" id="client_directory" placeholder="Ex: C:\meus-sites\maria-shop">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="client_start_command">Comando de início</label>
+                        <input type="text" id="client_start_command" placeholder="Ex: npm start  ou  node server.js">
+                    </div>
+                    <div class="form-group">
+                        <label for="client_port">Porta</label>
+                        <input type="number" id="client_port" placeholder="Ex: 3001">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="client_notes">Observações</label>
+                    <textarea id="client_notes" rows="2" placeholder="Anotações internas sobre o cliente..."></textarea>
+                </div>
+                <div id="client-form-msg" class="form-msg"></div>
+                <div class="form-actions">
+                    <button type="button" class="btn-ghost" id="btn-modal-cancel">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="btn-client-save" style="border:none; cursor:pointer; font-family:inherit;">Salvar Cliente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script defer src="js/hospedagem-panel.js"></script>
+    <script defer src="js/pwa-install.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entrar na sua conta Vision Plus - Automatizador de Instagram">
+    <title>Login - Vision Plus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="auth-page">
+
+    <div class="auth-wrapper">
+        <div class="auth-left">
+            <div class="auth-branding">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Vision Plus" class="logo-img">
+                </a>
+                <div class="auth-features">
+                    <div class="auth-feature">
+                        <span class="auth-feature-icon">🚀</span>
+                        <div>
+                            <strong>Automatização Inteligente</strong>
+                            <p>Cresça seu Instagram no automático</p>
+                        </div>
+                    </div>
+                    <div class="auth-feature">
+                        <span class="auth-feature-icon">🔍</span>
+                        <div>
+                            <strong>+20 Filtros Avançados</strong>
+                            <p>Encontre o público ideal para seu nicho</p>
+                        </div>
+                    </div>
+                    <div class="auth-feature">
+                        <span class="auth-feature-icon">🛡️</span>
+                        <div>
+                            <strong>Seguro e Confiável</strong>
+                            <p>Comportamento humanizado para proteger sua conta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Entrar</h2>
+                    <p>Acesse sua conta Vision Plus</p>
+                </div>
+
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+                            <button type="button" class="toggle-password" id="toggle-password" aria-label="Mostrar senha">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span class="checkmark"></span>
+                            Lembrar de mim
+                        </label>
+                        <a href="#" class="forgot-link" id="btn-forgot-password">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="btn-auth" id="btn-submit">Entrar</button>
+
+                    <div class="auth-message" id="auth-message"></div>
+                </form>
+
+                <div class="auth-footer" style="margin-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+                    <p>Não tem uma conta? <a href="cadastro.html">Criar conta grátis</a></p>
+                    <p style="font-size: 13px; opacity: 0.7;">É administrador? <a href="admin.html" style="color: #00d4ff; font-weight: 600;">Painel de Controle</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL REDEFINIR SENHA -->
+    <div class="modal-overlay" id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+        <div class="modal-box auth-card" style="max-width: 400px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.5); position:relative; background:#1e1e1e; padding:30px; border-radius:12px;">
+            <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="margin:0;">Redefinir Senha</h3>
+                <button class="modal-close" id="reset-modal-close" style="background:transparent;border:none;color:#fff;font-size:24px;cursor:pointer;">&times;</button>
+            </div>
+            
+            <!-- ETAPA 1: VALIDAR INFORMAÇÕES -->
+            <form id="reset-step-1" class="auth-form" style="margin-top:20px;">
+                <p style="font-size:14px; opacity:0.8; margin-bottom:15px;">Informe seu email e celular cadastrados para recuperar sua conta.</p>
+                <div class="form-group">
+                    <label for="reset-email">Email</label>
+                    <input type="email" id="reset-email" placeholder="seu@email.com" required style="width:100%;">
+                </div>
+                <div class="form-group">
+                    <label for="reset-phone">Celular</label>
+                    <input type="tel" id="reset-phone" placeholder="(11) 99999-9999" required style="width:100%;">
+                </div>
+                <button type="submit" class="btn-auth" id="btn-reset-verify" style="margin-top:10px;">Verificar Dados</button>
+                <div class="auth-message" id="reset-msg-1" style="display:none; margin-top:10px; font-size:14px;"></div>
+            </form>
+
+            <!-- ETAPA 2: NOVA SENHA -->
+            <form id="reset-step-2" class="auth-form" style="display:none; margin-top:20px;">
+                <p style="font-size:14px; opacity:0.8; margin-bottom:15px; color:#4cd137;">✅ Dados verificados. Enviamos um código pelo WhatsApp — digite-o abaixo e crie a nova senha.</p>
+                <div class="form-group">
+                    <label for="reset-token">Código recebido no WhatsApp</label>
+                    <input type="text" id="reset-token" placeholder="Cole aqui o código" required autocomplete="off" style="width:100%;">
+                </div>
+                <div class="form-group">
+                    <label for="reset-new-password">Nova Senha</label>
+                    <input type="password" id="reset-new-password" placeholder="Mínimo 6 caracteres" required minlength="6" style="width:100%;">
+                </div>
+                <div class="form-group">
+                    <label for="reset-confirm-password">Confirmar Nova Senha</label>
+                    <input type="password" id="reset-confirm-password" placeholder="Repita a senha" required minlength="6" style="width:100%;">
+                </div>
+                <button type="submit" class="btn-auth" id="btn-reset-confirm" style="margin-top:10px;">Salvar Nova Senha</button>
+                <div class="auth-message" id="reset-msg-2" style="display:none; margin-top:10px; font-size:14px;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/pwa-install.js"></script>
+</body>
+</html>

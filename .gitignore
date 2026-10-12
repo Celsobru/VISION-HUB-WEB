@@ -1,0 +1,36 @@
+# ============================================================
+#  Vísion Hub Web - arquivos que NAO devem ir para o Git
+# ============================================================
+
+# ---- Dependencias ----
+node_modules/
+server/node_modules/
+
+# ---- Ambiente / segredos (NUNCA commitar) ----
+.env
+.env.*
+!.env.example
+server/.env
+server/.env.*
+
+# ---- Banco de dados / dados vivos ----
+*.db
+*.sqlite
+*.sqlite3
+server/visionplus.db
+server/data.json
+
+# ---- Runtime: midia e filas geradas em execucao ----
+server/backups/
+server/output/
+server/temp/
+server/post-queue/
+server/logs/
+
+# ---- Logs ----
+*.log
+
+# ---- Sistema ----
+Thumbs.db
+desktop.ini
+.DS_Store

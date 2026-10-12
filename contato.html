@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contato - Vísion Hub Web. Fale com a equipe pelo WhatsApp ou pelo formulário. Orçamentos para sites, sistemas, hospedagem e automações.">
+    <title>Contato | Fale com a Vísion Hub Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vision-hub.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="canonical" href="https://visionhubweb.com.br/contato.html">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Vísion Hub Web">
+    <meta property="og:title" content="Contato | Fale com a Vísion Hub Web">
+    <meta property="og:description" content="Contato - Vísion Hub Web. Fale com a equipe pelo WhatsApp ou pelo formulário. Orçamentos para sites, sistemas, hospedagem e automações.">
+    <meta property="og:url" content="https://visionhubweb.com.br/contato.html">
+    <meta property="og:image" content="https://visionhubweb.com.br/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Vísion Hub Web - Sites, Sistemas, Hospedagem e Automações">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contato | Fale com a Vísion Hub Web">
+    <meta name="twitter:description" content="Contato - Vísion Hub Web. Fale com a equipe pelo WhatsApp ou pelo formulário. Orçamentos para sites, sistemas, hospedagem e automações.">
+    <meta name="twitter:image" content="https://visionhubweb.com.br/images/og-image.png">
+    <meta name="twitter:image:alt" content="Vísion Hub Web - Sites, Sistemas, Hospedagem e Automações">
+</head>
+<body>
+
+    <div class="top-banner">
+        <img src="images/banner.webp" alt="Fale conosco - Contato Vísion Hub Web para orçamentos">
+    </div>
+
+    <header id="main-header">
+        <div class="header-container">
+            <nav class="header-nav compact" id="main-nav">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="servicos.html" class="nav-link">Serviços</a>
+                <a href="sites.html" class="nav-link">Sites</a>
+                <a href="hospedagens.html" class="nav-link">Hospedagens</a>
+                <a href="automatizadores.html" class="nav-link">Automatizadores</a>
+                <a href="aplicativos.html" class="nav-link">Aplicativos</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="sobre.html" class="nav-link">Sobre</a>
+                <a href="contato.html" class="nav-link active">Contato</a>
+            </nav>
+            <div class="header-right">
+                <a href="login.html" class="btn-login" id="btn-login">Entrar</a>
+                <a href="cadastro.html" class="btn-signup" id="btn-signup">Criar Conta</a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <span class="slide-badge">Fale conosco</span>
+        <h1>Vamos conversar sobre <span class="gradient-text">o seu projeto</span></h1>
+        <p>Atendimento humano, resposta rápida e orçamento sem compromisso.</p>
+        <div class="hero-cta">
+            <a href="https://wa.me/14991819017" target="_blank" rel="noopener" class="btn-whatsapp">
+                <span class="whatsapp-icon">💬</span> WhatsApp: (14) 99181-9017
+            </a>
+        </div>
+    </section>
+
+    <section id="contato-form">
+        <div class="section-container" style="padding-top: 40px;">
+            <div class="section-header">
+                <span class="section-badge">Formulário</span>
+                <h2>Ou deixe sua <span class="gradient-text">mensagem</span></h2>
+                <p>Retornamos em até 24h úteis.</p>
+            </div>
+            <div class="auth-container" style="max-width: 620px; margin: 0 auto;">
+                <div id="contact-message" class="auth-message" style="display:none;"></div>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="contact-name">Seu nome</label>
+                        <input type="text" id="contact-name" required placeholder="Nome completo" style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit; font-size:14px; box-sizing:border-box;">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Seu email</label>
+                        <input type="email" id="contact-email" required placeholder="email@exemplo.com" style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit; font-size:14px; box-sizing:border-box;">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-subject">Assunto</label>
+                        <select id="contact-subject" class="auth-input" required style="padding:12px 16px;">
+                            <option value="">Selecione...</option>
+                            <option value="Orçamento - Site/Sistema">Orçamento - Site/Sistema</option>
+                            <option value="Orçamento - Hospedagem/VPS">Orçamento - Hospedagem/VPS</option>
+                            <option value="Orçamento - Aplicativo">Orçamento - Aplicativo</option>
+                            <option value="Orçamento - Automação">Orçamento - Automação</option>
+                            <option value="Suporte">Suporte</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-msg">Mensagem</label>
+                        <textarea id="contact-msg" rows="5" required placeholder="Conte o que você precisa..." style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit; font-size:14px; resize:vertical; box-sizing:border-box;"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" id="btn-contact-submit" style="width:100%; padding:14px; border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:15px;">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid four">
+                <div class="footer-col">
+                    <div class="logo footer-logo">
+                        <img src="images/logo.png" alt="Vísion Hub Web" class="logo-img small">
+                    </div>
+                    <p>Sites, sistemas, hospedagem, aplicativos e automações para o seu negócio. Tudo em um só lugar.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Serviços</h4>
+                    <a href="sites.html">Sites e Sistemas</a>
+                    <a href="loja-virtual.html">Loja Virtual</a>
+                    <a href="sistemas-web.html">Sistemas Web</a>
+                    <a href="hospedagem-de-sites.html">Hospedagem de Sites</a>
+                    <a href="vps.html">Hospedagem VPS</a>
+                    <a href="aplicativos.html">Aplicativos</a>
+                    <a href="automatizadores.html">Automatizadores</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Links</h4>
+                    <a href="index.html">Início</a>
+                    <a href="sobre.html">Sobre</a>
+                    <a href="contato.html">Contato</a>
+                    <a href="login.html">Login</a>
+                    <a href="cadastro.html">Criar Conta</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <a href="https://wa.me/14991819017" target="_blank" rel="noopener">WhatsApp</a>
+                    <a href="https://www.instagram.com/vision.plus.assessoria/" target="_blank" rel="noopener">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vísion Hub Web. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = window.location.origin + '/api';
+
+        // Preencher automaticamente se estiver logado
+        const userData = localStorage.getItem('vp_user');
+        if (userData) {
+            try {
+                const user = JSON.parse(userData);
+                document.getElementById('contact-name').value = user.name || '';
+                document.getElementById('contact-email').value = user.email || '';
+            } catch (e) {}
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-contact-submit');
+            const msg = document.getElementById('contact-message');
+
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+
+            try {
+                const res = await fetch(`${API_URL}/support/ticket`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('contact-name').value,
+                        email: document.getElementById('contact-email').value,
+                        instagram: '',
+                        subject: document.getElementById('contact-subject').value,
+                        message: document.getElementById('contact-msg').value
+                    })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    msg.className = 'auth-message success';
+                    msg.textContent = '✅ Mensagem enviada! Entraremos em contato em até 24h úteis.';
+                    msg.style.display = 'block';
+                    document.getElementById('contact-form').reset();
+                } else {
+                    msg.className = 'auth-message error';
+                    msg.textContent = '❌ ' + data.message;
+                    msg.style.display = 'block';
+                }
+            } catch (err) {
+                msg.className = 'auth-message error';
+                msg.textContent = '❌ Erro ao enviar. Tente novamente.';
+                msg.style.display = 'block';
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Enviar Mensagem';
+        });
+    </script>
+    <script src="js/app.js" defer></script>
+    <script src="js/site-content.js" defer></script>
+    <script src="js/site-edit.js" defer></script>
+    <script src="js/pwa-install.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Vísion Hub Web",
+        "url": "https://visionhubweb.com.br",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-14-99181-9017",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "pt-BR"
+        }
+    }
+    </script>
+</body>
+</html>

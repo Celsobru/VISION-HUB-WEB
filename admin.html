@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Vision Plus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="admin-page">
+
+    <!-- HEADER -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Vision Plus" class="logo-img">
+                <span class="logo-subtitle" style="color:#00d4ff; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px;">ADMIN</span>
+            </a>
+        </div>
+    </header>
+
+    <main id="admin-main">
+        <div id="login-view" style="display:none; max-width:400px; margin: 120px auto; background:#1a1a2e; padding:30px; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <img src="images/logo.png" alt="Vision Plus" style="height:40px;">
+                    <h2 style="margin-top:15px; color:#fff;">Acesso Administrativo</h2>
+                </div>
+                <form id="admin-login-form">
+                    <div style="margin-bottom:15px;">
+                        <label for="admin-email" style="display:block; margin-bottom:5px; color:#a0aec0;">Email Admin</label>
+                        <input type="email" id="admin-email" required style="width:100%; padding:10px; border-radius:6px; background:rgba(255,255,255,0.05); border:1px solid rgba(0,212,255,0.15); color:#fff;">
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <label for="admin-password" style="display:block; margin-bottom:5px; color:#a0aec0;">Senha</label>
+                        <input type="password" id="admin-password" required style="width:100%; padding:10px; border-radius:6px; background:rgba(255,255,255,0.05); border:1px solid rgba(0,212,255,0.15); color:#fff;">
+                    </div>
+                    <button type="submit" id="btn-admin-login" style="width:100%; padding:12px; border-radius:6px; background:linear-gradient(135deg,#00d4ff,#7c3aed); border:none; color:#fff; font-weight:bold; cursor:pointer; margin-top:10px;">Entrar no Painel</button>
+                    <div id="admin-login-msg" style="display:none; margin-top:15px; font-size:14px; text-align:center;"></div>
+                </form>
+            </div>
+
+            <div id="dashboard-view" style="display:none;">
+            <div class="admin-shell">
+
+                <!-- SIDEBAR -->
+                <aside class="admin-sidebar" id="admin-sidebar">
+                    <div class="admin-sidebar-brand">
+                        <div class="brand-box">⚡</div>
+                        <span>Vision Plus Admin</span>
+                    </div>
+                    <nav class="admin-sidebar-nav">
+                        <button class="sidebar-link active" data-tab="clients"><span class="link-icon">👥</span> Clientes</button>
+                        <button class="sidebar-link" data-tab="site"><span class="link-icon">🎨</span> Site</button>
+                        <button class="sidebar-link" data-tab="products"><span class="link-icon">💲</span> Produtos/Valores</button>
+                        <button class="sidebar-link" data-tab="admins"><span class="link-icon">👑</span> Administradores</button>
+                        <button class="sidebar-link" data-tab="tutorials"><span class="link-icon">📺</span> Tutoriais</button>
+                        <button class="sidebar-link" data-tab="tickets"><span class="link-icon">🎫</span> Suporte</button>
+                        <button class="sidebar-link" data-tab="backup"><span class="link-icon">💾</span> Backup</button>
+                    </nav>
+                    <div class="admin-sidebar-footer">
+                        <a href="index.html" class="sidebar-link"><span class="link-icon">🌐</span> Ver Site</a>
+                    </div>
+                </aside>
+
+                <!-- CONTENT -->
+                <div class="admin-content">
+                    <div class="admin-content-topbar">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <button class="admin-toggle-sidebar" id="btn-toggle-sidebar">☰</button>
+                            <h2 id="admin-section-title">Clientes</h2>
+                        </div>
+                        <div class="header-right" id="header-actions" style="display:none;">
+                            <button class="btn-primary" id="btn-settings" style="margin-right:10px; background:rgba(255,255,255,0.1); border:none; padding:8px 15px; border-radius:6px; color:#fff; cursor:pointer;">⚙️ Config.</button>
+                            <button class="btn-login" id="btn-logout">Sair</button>
+                        </div>
+                    </div>
+
+            <!-- STATS -->
+            <section class="admin-stats" id="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                    <div class="stat-label">Total Clientes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value" id="stat-trials">0</div>
+                    <div class="stat-label">Em Trial</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="stat-active">0</div>
+                    <div class="stat-label">Ativos Pagos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value" id="stat-revenue">R$ 0</div>
+                    <div class="stat-label">Receita Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⬇️</div>
+                    <div class="stat-value" id="stat-downloads">0</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+            </section>
+
+            <!-- TAB: CLIENTS -->
+            <section class="admin-section" id="tab-clients">
+                <div class="admin-toolbar" style="display:flex; gap:10px;">
+                    <input type="text" id="search-clients" placeholder="🔍 Buscar por nome, email ou @instagram..." class="admin-search" style="flex:1;">
+                    <button class="btn-primary" id="btn-show-add-user" style="padding:10px 15px; white-space:nowrap;">+ Adicionar Cliente</button>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="clients-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Instagram</th>
+                                <th>Plano</th>
+                                <th>Extensões</th>
+                                <th>Expira em</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clients-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: SITE (editor do site) -->
+            <section class="admin-section" id="tab-site" style="display:none;">
+                <div class="site-intro">
+                    <h3>🎨 Editor do Site</h3>
+                    <p>Edite os textos e imagens das páginas do site com um clique e gerencie os clientes da vitrine (logotipo, nome, link e ordem).</p>
+                </div>
+
+                <!-- CLIENTES DA VITRINE -->
+                <div class="site-block">
+                    <div class="site-block-head">
+                        <h4>👥 Clientes (vitrine)</h4>
+                        <button class="btn-primary" id="btn-add-site-client" style="padding:9px 15px;">+ Adicionar cliente</button>
+                    </div>
+                    <p class="site-hint">Esses clientes aparecem na página <strong>Clientes</strong> do site. Suba a logo, escreva o nome, o tipo e o link (opcional).</p>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table" id="site-clients-table">
+                            <thead>
+                                <tr>
+                                    <th>Logo</th>
+                                    <th>Nome</th>
+                                    <th>Tipo</th>
+                                    <th>Link</th>
+                                    <th>Ativo</th>
+                                    <th>Ordem</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="site-clients-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PÁGINAS DO SITE -->
+                <div class="site-block">
+                    <div class="site-block-head">
+                        <h4>📄 Páginas do site</h4>
+                    </div>
+                    <p class="site-hint">Clique em <strong>Editar</strong> para abrir a página em modo de edição. Clique em qualquer texto ou imagem, altere e clique em <strong>Salvar</strong>. <strong>Resetar</strong> apaga as edições da página (volta ao original).</p>
+                    <div id="site-pages-list" class="site-pages"></div>
+                </div>
+            </section>
+
+            <!-- TAB: PRODUTOS/VALORES -->
+            <section class="admin-section" id="tab-products" style="display:none;">
+                <p style="color:#a0aec0; font-size:13px; margin-bottom:15px;">Preço base do InstaBot por período. Os demais produtos são calculados por percentual da base: sozinho (standalone) ou no combo com InstaBot.</p>
+                <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:15px;">
+                    <div class="form-row" style="flex:1; min-width:150px;">
+                        <label>Base InstaBot — Mensal (R$)</label>
+                        <input type="number" id="price-instabot-mensal" class="admin-input" min="0" step="0.01">
+                    </div>
+                    <div class="form-row" style="flex:1; min-width:150px;">
+                        <label>Base InstaBot — Trimestral (R$)</label>
+                        <input type="number" id="price-instabot-trimestral" class="admin-input" min="0" step="0.01">
+                    </div>
+                    <div class="form-row" style="flex:1; min-width:150px;">
+                        <label>Base InstaBot — Semestral (R$)</label>
+                        <input type="number" id="price-instabot-semestral" class="admin-input" min="0" step="0.01">
+                    </div>
+                    <div class="form-row" style="flex:1; min-width:150px;">
+                        <label>Base InstaBot — Anual (R$)</label>
+                        <input type="number" id="price-instabot-anual" class="admin-input" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="products-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Ativo</th>
+                                <th>Sozinho (%)</th>
+                                <th>No combo (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-tbody"></tbody>
+                    </table>
+                </div>
+                <div id="products-preview" style="margin-top:12px; font-size:13px; color:#a0aec0;"></div>
+                <div style="display:flex; gap:10px; align-items:center; margin-top:15px;">
+                    <button class="btn-primary" id="btn-save-products" style="padding:10px 20px;">💾 Salvar Valores</button>
+                    <span id="products-msg" style="font-size:13px;"></span>
+                </div>
+            </section>
+
+            <!-- TAB: ADMINS -->
+            <section class="admin-section" id="tab-admins" style="display:none;">
+                <div class="admin-toolbar" style="display:flex; justify-content:flex-end; margin-bottom:15px;">
+                    <button class="btn-primary" id="btn-show-add-admin" style="padding:10px 15px;">+ Adicionar Administrador</button>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="admins-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Criado em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admins-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: SUPPORT TICKETS -->
+            <section class="admin-section" id="tab-tickets" style="display:none;">
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="tickets-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Email</th>
+                                <th>Assunto</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tickets-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: TUTORIALS -->
+            <section class="admin-section" id="tab-tutorials" style="display:none;">
+                <div class="admin-toolbar" style="display:flex; justify-content:flex-end; margin-bottom:15px;">
+                    <button class="btn-primary" id="btn-show-add-tutorial" style="padding:10px 15px;">+ Adicionar Tutorial</button>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="tutorials-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Link Embed</th>
+                                <th>Criado em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tutorials-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: BACKUP -->
+            <section class="admin-section" id="tab-backup" style="display:none;">
+                <div class="backup-container">
+                    <!-- DOWNLOAD BACKUP -->
+                    <div class="backup-card">
+                        <div class="backup-icon">📦</div>
+                        <h3>Gerar Backup</h3>
+                        <p>Faça download de uma cópia completa do banco de dados, incluindo todos os clientes, planos, pagamentos, tickets e configurações.</p>
+                        <button class="btn-backup btn-backup-download" id="btn-download-backup">⬇️ Download Backup</button>
+                        <div class="backup-status" id="backup-download-status"></div>
+                    </div>
+
+                    <!-- RESTORE BACKUP -->
+                    <div class="backup-card">
+                        <div class="backup-icon">🔄</div>
+                        <h3>Restaurar Backup</h3>
+                        <p>Restaure um backup anterior. Um backup de segurança do banco atual será criado automaticamente antes da restauração.</p>
+                        <input type="file" id="restore-file-input" accept=".db" style="display:none;">
+                        <button class="btn-backup btn-backup-restore" id="btn-restore-backup">📂 Selecionar Arquivo .db</button>
+                        <div class="backup-status" id="backup-restore-status"></div>
+                    </div>
+                </div>
+
+                <div class="backup-info">
+                    <strong>ℹ️ Informações importantes:</strong><br>
+                    • O backup contém <strong>todos os dados</strong>: clientes, logins, senhas (criptografadas com bcrypt), planos, pagamentos e tickets.<br>
+                    • Ao restaurar, o banco atual é substituído pelo arquivo enviado.<br>
+                    • Um <strong>backup de segurança</strong> é criado automaticamente na pasta <code>server/backups/</code> antes de cada restauração.<br>
+                    • O arquivo de backup tem formato <code>.db</code> (SQLite).<br>
+                    • Recomendamos fazer backup regularmente como precaução.
+                </div>
+            </section>
+
+            <!-- MODAL EDITAR CLIENTE -->
+            <div class="modal-overlay" id="edit-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3>✏️ Editar Cliente</h3>
+                        <button class="modal-close" id="modal-close">&times;</button>
+                    </div>
+                    <form id="edit-form">
+                        <input type="hidden" id="edit-id">
+                        <div class="form-row">
+                            <label>Nome</label>
+                            <input type="text" id="edit-name" class="admin-input">
+                        </div>
+                        <div class="form-row">
+                            <label>Email</label>
+                            <input type="email" id="edit-email" class="admin-input">
+                        </div>
+                        <div class="form-row">
+                            <label>Instagram</label>
+                            <input type="text" id="edit-instagram" class="admin-input">
+                        </div>
+                        <div class="form-row">
+                            <label>Plano</label>
+                            <select id="edit-plan" class="admin-input">
+                                <option value="trial">Trial (7 dias)</option>
+                                <option value="mensal">Mensal (30 dias)</option>
+                                <option value="trimestral">Trimestral (3 meses)</option>
+                                <option value="semestral">Semestral (6 meses)</option>
+                                <option value="anual">Anual (12 meses)</option>
+                                <option value="admin">Admin (permanente)</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Data de expiração</label>
+                            <input type="date" id="edit-expiry" class="admin-input">
+                        </div>
+                        <div class="form-row">
+                            <label>Adicionar bônus (dias extras)</label>
+                            <input type="number" id="edit-bonus" class="admin-input" placeholder="Ex: 30" min="0">
+                        </div>
+                        <div class="form-row">
+                            <label>Status</label>
+                            <select id="edit-status" class="admin-input">
+                                <option value="1">Ativo</option>
+                                <option value="0">Desativado</option>
+                            </select>
+                        </div>
+
+                        <!-- INSTAGRAMS GERENCIAMENTO -->
+                        <div class="form-row" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; margin-top:8px;">
+                            <label>📱 Contas de Instagram</label>
+                            <div id="edit-instagrams-list" style="margin:8px 0;"></div>
+                            <div style="display:flex; gap:8px; margin-top:8px;">
+                                <input type="text" id="edit-new-ig" class="admin-input" placeholder="@novo_instagram" style="flex:1;">
+                                <button type="button" class="btn-primary" id="btn-add-ig" style="padding:8px 16px; font-size:13px;">+ Adicionar @</button>
+                            </div>
+                        </div>
+
+                        <!-- EXTENSÕES DO CLIENTE -->
+                        <div class="form-row" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; margin-top:8px;">
+                            <label>🧩 Extensões do cliente</label>
+                            <div id="edit-products-list" style="margin:8px 0; display:flex; flex-direction:column; gap:8px;">
+                                <p style="opacity:0.5; font-size:13px;">Carregando extensões...</p>
+                            </div>
+                            <button type="button" class="btn-primary" id="btn-save-rights" style="padding:8px 16px; font-size:13px; margin-top:4px;">💾 Salvar Direitos</button>
+                            <span id="edit-rights-msg" style="font-size:12px; margin-left:8px;"></span>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn-secondary" id="btn-reset-user-password" style="background:#e17055; color:#fff; border:none; margin-right:auto;">Trocar Senha</button>
+                            <button type="submit" class="btn-primary">Salvar Alterações</button>
+                            <button type="button" class="btn-secondary" id="modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL VER TICKET -->
+            <div class="modal-overlay" id="ticket-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3>🎫 Ticket de Suporte</h3>
+                        <button class="modal-close" id="ticket-modal-close">&times;</button>
+                    </div>
+                    <div id="ticket-detail"></div>
+                    <div class="modal-actions">
+                        <button class="btn-primary" id="ticket-resolve">Marcar como Resolvido</button>
+                        <button class="btn-secondary" id="ticket-modal-cancel">Fechar</button>
+                    </div>
+                </div> <!-- fechamento modal-box ticket -->
+            </div> <!-- fechamento ticket-modal -->
+
+                </div> <!-- fim admin-content -->
+            </div> <!-- fim admin-shell -->
+
+            </div> <!-- fim dashboard-view -->
+            <div class="modal-overlay" id="restore-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3>⚠️ Confirmar Restauração</h3>
+                        <button class="modal-close" id="restore-modal-close">&times;</button>
+                    </div>
+                    <div class="restore-confirm-box">
+                        <div class="warn-icon">⚠️</div>
+                        <h4>Atenção: Esta ação irá substituir todos os dados atuais!</h4>
+                        <p>Todos os clientes, planos, pagamentos e tickets atuais serão substituídos pelo conteúdo do backup selecionado.</p>
+                        <p>Um backup de segurança do banco atual será salvo automaticamente.</p>
+                        <div class="restore-file-info" id="restore-file-info"></div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-primary" id="btn-confirm-restore" style="background:linear-gradient(135deg, #e17055, #d63031);">Sim, Restaurar</button>
+                        <button class="btn-secondary" id="btn-cancel-restore">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL CONFIGURAÇÕES ADMIN -->
+            <div class="modal-overlay" id="settings-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3>⚙️ Configurações da Conta Admin</h3>
+                        <button class="modal-close" id="settings-modal-close">&times;</button>
+                    </div>
+                    <form id="settings-form">
+                        <div class="form-row">
+                            <label>Novo Email (opcional)</label>
+                            <input type="email" id="settings-email" class="admin-input">
+                        </div>
+                        <div class="form-row">
+                            <label>Nova Senha (opcional)</label>
+                            <input type="password" id="settings-new-password" class="admin-input" placeholder="Mínimo 6 caracteres">
+                        </div>
+                        <div class="form-row" style="margin-top:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+                            <label style="color:#ff7675;">Senha Atual (obrigatório para salvar)</label>
+                            <input type="password" id="settings-current-password" class="admin-input" required>
+                        </div>
+                        <div id="settings-msg" style="display:none; margin:10px 0; font-size:14px; text-align:center;"></div>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">Salvar Alterações</button>
+                            <button type="button" class="btn-secondary" id="settings-modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL ADICIONAR CLIENTE -->
+            <div class="modal-overlay" id="add-user-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3>👤 Adicionar Cliente</h3>
+                        <button class="modal-close" id="add-user-modal-close">&times;</button>
+                    </div>
+                    <form id="add-user-form">
+                        <div class="form-row">
+                            <label>Nome *</label>
+                            <input type="text" id="add-user-name" class="admin-input" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Email *</label>
+                            <input type="email" id="add-user-email" class="admin-input" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Senha *</label>
+                            <input type="password" id="add-user-password" class="admin-input" minlength="6" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Instagram</label>
+                            <input type="text" id="add-user-instagram" class="admin-input" placeholder="@usuario">
+                        </div>
+                        <div class="form-row">
+                            <label>Plano</label>
+                            <select id="add-user-plan" class="admin-input">
+                                <option value="trial">Trial (7 dias)</option>
+                                <option value="mensal">Mensal (30 dias)</option>
+                                <option value="trimestral">Trimestral (3 meses)</option>
+                                <option value="semestral">Semestral (6 meses)</option>
+                                <option value="anual">Anual (12 meses)</option>
+                                <option value="admin">Admin (permanente)</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Bônus de dias extras</label>
+                            <input type="number" id="add-user-bonus" class="admin-input" placeholder="0">
+                        </div>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">Criar Cliente</button>
+                            <button type="button" class="btn-secondary" id="add-user-modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL ADICIONAR ADMIN -->
+            <div class="modal-overlay" id="add-admin-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3>👑 Adicionar Administrador</h3>
+                        <button class="modal-close" id="add-admin-modal-close">&times;</button>
+                    </div>
+                    <form id="add-admin-form">
+                        <div class="form-row">
+                            <label>Nome *</label>
+                            <input type="text" id="add-admin-name" class="admin-input" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Email *</label>
+                            <input type="email" id="add-admin-email" class="admin-input" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Senha *</label>
+                            <input type="password" id="add-admin-password" class="admin-input" minlength="6" required>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">Criar Admin</button>
+                            <button type="button" class="btn-secondary" id="add-admin-modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL REDEFINIR SENHA RAPIDA -->
+            <div class="modal-overlay" id="reset-password-modal" style="display:none;">
+                <div class="modal-box" style="max-width:400px;">
+                    <div class="modal-header">
+                        <h3>🔑 Redefinir Senha</h3>
+                        <button class="modal-close" id="reset-password-modal-close">&times;</button>
+                    </div>
+                    <form id="reset-password-form">
+                        <input type="hidden" id="reset-target-id">
+                        <input type="hidden" id="reset-target-type">
+                        <div style="margin-bottom:15px; font-size:13px; color:#aaa;">Defina uma nova senha para este usuário. Não é necessário saber a senha atual.</div>
+                        <div class="form-row">
+                            <label>Nova Senha *</label>
+                            <input type="password" id="reset-new-password" class="admin-input" minlength="6" required>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary" style="background:#e17055;">Redefinir</button>
+                            <button type="button" class="btn-secondary" id="reset-password-modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL ADICIONAR TUTORIAL -->
+            <div class="modal-overlay" id="add-tutorial-modal" style="display:none;">
+                <div class="modal-box" style="max-width:500px;">
+                    <div class="modal-header">
+                        <h3>📺 Adicionar Tutorial</h3>
+                        <button class="modal-close" id="add-tutorial-modal-close">&times;</button>
+                    </div>
+                    <form id="add-tutorial-form">
+                        <div class="form-row">
+                            <label>Nome do Vídeo *</label>
+                            <input type="text" id="add-tutorial-title" class="admin-input" placeholder="Ex: Como Seguir Automaticamente" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Link Embed do YouTube *</label>
+                            <input type="text" id="add-tutorial-url" class="admin-input" placeholder="Ex: https://www.youtube.com/embed/XXXXX" required>
+                            <small style="color: var(--text-muted); font-size:11px; margin-top:4px; display:block;">Cole o link do YouTube → Compartilhar → Incorporar → copie o src do iframe.</small>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">Adicionar</button>
+                            <button type="button" class="btn-secondary" id="add-tutorial-modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL SITE CLIENTE (vitrine) -->
+            <div class="modal-overlay" id="site-client-modal" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3 id="site-client-modal-title">✏️ Cliente da vitrine</h3>
+                        <button class="modal-close" id="site-client-modal-close">&times;</button>
+                    </div>
+                    <form id="site-client-form">
+                        <input type="hidden" id="site-client-id">
+                        <div class="form-row">
+                            <label>Nome *</label>
+                            <input type="text" id="site-client-name" class="admin-input" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Logo do cliente</label>
+                            <div style="display:flex; align-items:center; gap:14px;">
+                                <div id="site-client-logo-preview" class="site-logo-preview">sem logo</div>
+                                <div style="display:flex; flex-direction:column; gap:8px;">
+                                    <input type="file" id="site-client-logo-file" accept="image/*" style="display:none;">
+                                    <button type="button" class="btn-secondary" id="btn-site-client-logo">Escolher imagem</button>
+                                    <button type="button" class="btn-secondary" id="btn-site-client-logo-clear">Remover logo</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="site-client-logo">
+                        </div>
+                        <div class="form-row">
+                            <label>Tipo (opcional)</label>
+                            <input type="text" id="site-client-type" class="admin-input" placeholder="Site, Loja Virtual, Aplicativo...">
+                        </div>
+                        <div class="form-row">
+                            <label>Descrição (opcional)</label>
+                            <input type="text" id="site-client-description" class="admin-input" placeholder="Uma frase curta sobre o projeto">
+                        </div>
+                        <div class="form-row">
+                            <label>Link do site/app (opcional)</label>
+                            <input type="text" id="site-client-url" class="admin-input" placeholder="https://...">
+                        </div>
+                        <div class="form-row">
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="site-client-active" checked style="width:auto;"> Mostrar na página de clientes
+                            </label>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">Salvar</button>
+                            <button type="button" class="btn-secondary" id="site-client-modal-cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+    </main>
+
+    <script defer src="js/admin.js"></script>
+    <script defer src="js/pwa-install.js"></script>
+</body>
+</html>
