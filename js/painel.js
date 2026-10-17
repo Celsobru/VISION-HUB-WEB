@@ -277,8 +277,8 @@ async function trackDownload(e) {
         });
     } catch (err) { /* silencioso */ }
 
-    // Redirecionar para o download
-    window.open('https://drive.google.com/uc?export=download&id=1sjktdABbs34xjugmJzLkSXhCVest99R7', '_blank');
+    // Redirecionar para o download (build corrigida, hospedada no próprio servidor)
+    window.open('/downloads/instabot-extension.zip', '_blank');
 }
 
 // ============ VIDEO MODAL ============
