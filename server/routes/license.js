@@ -36,6 +36,12 @@ router.get('/check', (req, res) => {
                 if (fb) { ownerId = fb.user_id; ownerPlan = fb.user_plan; ownerName = fb.user_name; }
             }
             if (ownerId) {
+                // Verificar se a conta do usuário está ativa
+                const ownerUser = prepare('SELECT is_active FROM users WHERE id = ?').get(ownerId);
+                if (ownerUser && ownerUser.is_active == 0) {
+                    logIt(ownerId, 'deactivated');
+                    return res.json({ success: true, licensed: false, status: 'deactivated', product, message: 'Conta desativada. Entre em contato pelo suporte.' });
+                }
                 const ent = prepare('SELECT * FROM user_products WHERE user_id = ? AND product_code = ?').get(ownerId, product);
                 if (ent) {
                     const now = new Date();
