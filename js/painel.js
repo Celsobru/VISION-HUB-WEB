@@ -278,7 +278,7 @@ async function trackDownload(e) {
     } catch (err) { /* silencioso */ }
 
     // Redirecionar para o download (build corrigida, hospedada no próprio servidor)
-    window.open('/downloads/instabot-extension.zip', '_blank');
+    window.open('/downloads/instabot-extension.zip?v=3.0.1', '_blank');
 }
 
 // ============ VIDEO MODAL ============
