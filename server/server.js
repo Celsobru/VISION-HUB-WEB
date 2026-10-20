@@ -32,6 +32,12 @@ if (fs.existsSync(dotenvPath)) {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Atrás do Cloudflare Tunnel as requisicoes chegam via loopback (cloudflared):
+// sem isso req.ip vira 127.0.0.1 para TODO mundo e o authLimiter compartilha
+// um unico balde de 20 tentativas de login/15min entre todos os visitantes
+// (bloqueava o login de todos quando alguem tentava algumas vezes).
+app.set('trust proxy', 'loopback');
+
 // ============ MIDDLEWARE ============
 // CORS restrito (antes: aberto p/ qualquer origem). Extensão (Instagram/Blogspot),
 // localhost e o domínio precisam estar em ALLOWED_ORIGINS no .env

@@ -15,6 +15,33 @@ function getAuthHeaders(extras = {}) {
     };
 }
 
+// Token do admin vale 24h: quando expira, todas as chamadas da API voltam
+// 401/403 e o painel ficava ABERTO MAS ZERADO sem nenhum aviso (loadClients
+// etc retornavam silenciosos em !data.success). Agora: limpa a sessao e volta
+// pra tela de login com mensagem.
+const _nativeFetch = window.fetch.bind(window);
+window.fetch = async function (...args) {
+    const res = await _nativeFetch(...args);
+    try {
+        const raw = args[0];
+        const url = (typeof raw === 'string') ? raw : (raw && raw.url) || '';
+        const isApi = url.indexOf('/api/') !== -1;
+        const isLogin = url.indexOf('/admin/login') !== -1 || url.indexOf('/auth/login') !== -1;
+        if (isApi && !isLogin && (res.status === 401 || res.status === 403) && sessionStorage.getItem('admin_token')) {
+            sessionStorage.removeItem('admin_token');
+            const dv = document.getElementById('dashboard-view');
+            const ha = document.getElementById('header-actions');
+            const lv = document.getElementById('login-view');
+            const msg = document.getElementById('admin-login-msg');
+            if (dv) dv.style.display = 'none';
+            if (ha) ha.style.display = 'none';
+            if (lv) lv.style.display = 'block';
+            if (msg) { msg.style.display = 'block'; msg.style.color = '#e74c3c'; msg.textContent = 'Sessão expirada. Faça login novamente.'; }
+        }
+    } catch (e) { /* ignora erros do wrapper */ }
+    return res;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // Auth Check
